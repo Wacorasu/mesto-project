@@ -1,0 +1,26 @@
+.button-exit {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  min-width: 32px;
+  min-height: 32px;
+  background-image: url(../../images/Close-button.svg);
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  background-size: contain;
+  opacity: 1;
+  transition: opasity .4s ease-in-out ;
+}
+
+.button-exit:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 600px) {
+  .button-exit {
+    min-width: 20px;
+    min-height: 20px;
+    top: -36px;
+    right: 0;
+  }
+}

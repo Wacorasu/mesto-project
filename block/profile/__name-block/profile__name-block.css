@@ -1,0 +1,9 @@
+.profile__name-block {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .profile__name-block {
+    margin-bottom: 36px;
+  }
+}
