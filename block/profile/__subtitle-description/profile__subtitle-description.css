@@ -2,14 +2,18 @@
   margin: 0;
   padding: 0;
   font-weight: 400;
+  max-width: 300px;
   font-size: 18px;
   line-height: 22px;
   color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 780px) {
 .profile__subtitle-description {
-  font-weight: 400;
+  max-width: 200px;
   font-size: 14px;
   line-height: 17px;
 }

@@ -1,9 +1,13 @@
 .profile__name-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
 }
 
 @media screen and (max-width: 600px) {
   .profile__name-block {
     margin-bottom: 36px;
+    align-items: center;
   }
 }

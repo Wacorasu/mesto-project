@@ -1,11 +1,10 @@
 .photo-card__description {
   width: 100%;
-  min-height: 79px;
   background-color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 0 15px 0 21px;
+  padding: 25px 21px 25px 15px;
   border-radius: 0 0 10px 10px;
 }

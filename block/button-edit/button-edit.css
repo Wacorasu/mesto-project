@@ -1,7 +1,7 @@
 .button-edit {
     width: 24px;
     height: 24px;
-    background-color: #000;
+    background-color: rgba(0, 0, 0, 0);
     border-color: #fff;
     background-image: url(../../images/edit-button.svg);
     background-position: center;

@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./pages/index.css" />
-    <link rel="icon" href="./favicon.png" />
+    <link rel="icon" href="./favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mesto</title>
+    <title>Место</title>
     <meta name="description" content="Страница фото альбом" />
     <meta name="author" content="Ванчуренков Константин" />
   </head>
   <body class="main">
-    <div class="page main__page">
+    <div class="page">
       <header class="header page__header">
         <img class="header__logo" src="./images/logo.svg" alt="Лого" />
       </header>
@@ -20,11 +20,11 @@
           <div class="profile__name-block">
             <div class="profile__button-block">
             <h1 class="profile__title-name">Жак-Ив Кусто</h1>
-            <button class="button-edit" type="button"></button>
+            <button class="button-edit" type="button" aria-label="Редактировать"></button>
             </div>
             <p class="profile__subtitle-description">Исследователь океана</p>
           </div>
-          <button class="button-add" type="button"></button>
+          <button class="button-add" type="button" aria-label="Добавить"></button>
         </section>
         <section class="photo-panel">
           <article class="photo-card">
@@ -71,19 +71,21 @@
           </article>
         </section>
       </main>
-      <footer class="footer">
+      <footer class="footer page__footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
-      <article class="pop-up">
-      <form class="edit-form">
+      <article class="pop-up pop-up_opened">
+      <div class="edit-form page__edit-form">
           <h2 class="edit-form__title">Редактировать профиль</h2>
-          <fieldset class="edit-form__input-container">
-              <input class="edit-form__edit-title" type="text" placeholder="Жак-Ив Кусто">
-              <input class="edit-form__edit-subtitle" type="text" placeholder="Исследователь океана">
-          </fieldset>
-          <button class="button-save" type="button">Сохранить</button>
-          <button class="button-exit" type="button"></button>
-      </form>
+          <form class="edit-from__input-container" name="popup">
+            <fieldset class="edit-form__edit-container">
+                <input class="edit-form__edit" type="text" placeholder="Жак-Ив Кусто" name="edit-title">
+                <input class="edit-form__edit" type="text" placeholder="Исследователь океана" name="edit-subtitle">
+            </fieldset>
+            <button class="button-save" type="submit">Сохранить</button>
+          </form>
+          <button class="button-exit" type="button" aria-label="Закрыть"></button>
+      </div>
       </article>
     </div>
   </body>

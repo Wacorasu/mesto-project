@@ -1,0 +1,9 @@
+.edit-form__edit-container {
+  padding: 0;
+  margin: 0;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 48px;
+}

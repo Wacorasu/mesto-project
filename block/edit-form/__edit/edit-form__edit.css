@@ -1,4 +1,4 @@
-.edit-form__edit-title {
+.edit-form__edit {
   margin: 0;
   padding: 0;
   min-height: 27px;
@@ -8,7 +8,11 @@
 
 }
 
-.edit-form__edit-title::placeholder {
+.edit-form__edit:last-child {
+  margin-bottom: 0;
+}
+
+.edit-form__edit::placeholder {
   font-weight: 400;
   font-size: 14px;
   line-height: 17px;
