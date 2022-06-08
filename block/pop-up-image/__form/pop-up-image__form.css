@@ -1,0 +1,15 @@
+.pop-up-image__form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 75vw;
+  background-color: rgba(0, 0, 0, 0);
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 600px) {
+  .edit-form {
+    max-width: 282px;
+    padding: 25px 22px;
+  }
+}

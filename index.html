@@ -27,66 +27,55 @@
           <button class="button-add" type="button" aria-label="Добавить"></button>
         </section>
         <section class="photo-panel">
-          <article class="photo-card">
-            <img class="photo-card__photo" src="./images/card-california.jpg" alt="Калифорния" />
-            <div class="photo-card__description">
-              <h2 class="photo-card__title">Калифорния</h2>
-              <button type="button" class="button-like"></button>
-            </div>
-          </article>
-          <article class="photo-card">
-            <img class="photo-card__photo" src="./images/card-finland.jpg" alt="Финляндия" />
-            <div class="photo-card__description">
-              <h2 class="photo-card__title">Финляндия</h2>
-              <button type="button" class="button-like"></button>
-            </div>
-          </article>
-          <article class="photo-card">
-            <img class="photo-card__photo" src="./images/card-italia-marche.jpg" alt="Италия" />
-            <div class="photo-card__description">
-              <h2 class="photo-card__title">Марке Италия</h2>
-              <button type="button" class="button-like"></button>
-            </div>
-          </article>
-          <article class="photo-card">
-            <img class="photo-card__photo" src="./images/card-kizhi.jpg" alt="Кижи" />
-            <div class="photo-card__description">
-              <h2 class="photo-card__title">Кижи Карелия</h2>
-              <button type="button" class="button-like"></button>
-            </div>
-          </article>
-          <article class="photo-card">
-            <img class="photo-card__photo" src="./images/card-schweiz.jpg" alt="Швейцария" />
-            <div class="photo-card__description">
-              <h2 class="photo-card__title">Швейцария</h2>
-              <button type="button" class="button-like"></button>
-            </div>
-          </article>
-          <article class="photo-card">
-            <img class="photo-card__photo" src="./images/card_okinawa.jpg" alt="Окинава" />
-            <div class="photo-card__description">
-              <h2 class="photo-card__title">Окинава Япония</h2>
-              <button type="button" class="button-like"></button>
-            </div>
-          </article>
         </section>
       </main>
       <footer class="footer page__footer">
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
-      <article class="pop-up pop-up_opened">
+      <article class="pop-up" id="pop-up-edit">
       <div class="edit-form">
           <h2 class="edit-form__title">Редактировать профиль</h2>
-          <form class="edit-from__input-container" name="popup">
+          <form class="edit-from__input-container" id="edit-form" name="popup-edit">
             <fieldset class="edit-form__edit-container">
-                <input class="edit-form__edit" type="text" placeholder="Жак-Ив Кусто" name="edit-title">
-                <input class="edit-form__edit" type="text" placeholder="Исследователь океана" name="edit-subtitle">
+                <input class="edit-form__edit" id=edit-name type="text" placeholder="Жак-Ив Кусто" required name="edit-title" value="">
+                <input class="edit-form__edit" id=edit-subname type="text" placeholder="Исследователь океана" required name="edit-subtitle" value="">
             </fieldset>
             <button class="button-save" type="submit">Сохранить</button>
           </form>
-          <button class="button-exit" type="button" aria-label="Закрыть"></button>
+          <button class="button-exit" id="button-exit-edit" type="button" aria-label="Закрыть"></button>
       </div>
       </article>
+      <article class="pop-up" id="pop-up-add">
+        <div class="edit-form">
+            <h2 class="edit-form__title">Новое место</h2>
+            <form class="edit-from__input-container" id="add-form" name="popup-add">
+              <fieldset class="edit-form__edit-container">
+                  <input class="edit-form__edit edit-form__edit_popup-add" id="add-name" type="text" placeholder="Название" required name="add-name" value="">
+                  <input class="edit-form__edit edit-form__edit_popup-add" id="add-image" type="text" placeholder="Ссылка на картинку" required name="add-image" value="">
+              </fieldset>
+              <button class="button-save" type="submit">Создать</button>
+            </form>
+            <button class="button-exit" id="button-exit-add" type="button" aria-label="Закрыть"></button>
+        </div>
+        </article>
+        <article class="pop-up-image">
+          <div class="pop-up-image__form">
+            <img class="pop-up-image__image" src="" alt="">
+            <h2 class="pop-up-image__title"></h2>
+            <button class="button-exit" id="button-exit-image" type="button" aria-label="Закрыть"></button>
+          </div>
+        </article>
     </div>
+  <template class="template-photo-card">
+    <article class="photo-card">
+      <img class="photo-card__photo" src="" alt="" />
+      <button type="button" class="button-delete" aria-label="Удалить"></button>
+      <div class="photo-card__description">
+        <h2 class="photo-card__title"></h2>
+        <button type="button" class="button-like" aria-label="Нравится"></button>
+      </div>
+    </article>
+  </template>
+  <script src="./script.js"></script>
   </body>
 </html>
