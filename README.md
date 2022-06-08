@@ -4,5 +4,5 @@
 - Добавление карточек с фотографиями
 - Редактирование профиля
 - Реализация удаления карточек
-- Реализация "Лаков"
- URL: https://wacorasu.github.io/prod_mesto/
+- Реализация "Лайков"
+URL: https://wacorasu.github.io/prod_mesto/
