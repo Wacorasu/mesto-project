@@ -37,12 +37,12 @@
           <h2 class="edit-form__title">Редактировать профиль</h2>
           <form class="edit-from__input-container" id="edit-form" name="popup-edit">
             <fieldset class="edit-form__edit-container">
-                <input class="edit-form__edit" id=edit-name type="text" placeholder="Жак-Ив Кусто" required name="edit-title" value="">
-                <input class="edit-form__edit" id=edit-subname type="text" placeholder="Исследователь океана" required name="edit-subtitle" value="">
+                <input class="edit-form__edit" id=edit-name type="text" placeholder="Введите имя" required name="edit-title" value="">
+                <input class="edit-form__edit" id=edit-subname type="text" placeholder="Введите род деятельности" required name="edit-subtitle" value="">
             </fieldset>
             <button class="button-save" type="submit">Сохранить</button>
           </form>
-          <button class="button-exit" id="button-exit-edit" type="button" aria-label="Закрыть"></button>
+          <button class="button-exit"  type="button" aria-label="Закрыть"></button>
       </div>
       </article>
       <article class="pop-up" id="pop-up-add">
@@ -55,14 +55,14 @@
               </fieldset>
               <button class="button-save" type="submit">Создать</button>
             </form>
-            <button class="button-exit" id="button-exit-add" type="button" aria-label="Закрыть"></button>
+            <button class="button-exit" type="button" aria-label="Закрыть"></button>
         </div>
         </article>
-        <article class="pop-up-image">
-          <div class="pop-up-image__form">
-            <img class="pop-up-image__image" src="" alt="">
-            <h2 class="pop-up-image__title"></h2>
-            <button class="button-exit" id="button-exit-image" type="button" aria-label="Закрыть"></button>
+        <article class="pop-up" id="pop-up-image">
+          <div class="form-image">
+            <img class="form-image__image" src="" alt="">
+            <h2 class="form-image__title"></h2>
+            <button class="button-exit" type="button" aria-label="Закрыть"></button>
           </div>
         </article>
     </div>
@@ -76,6 +76,6 @@
       </div>
     </article>
   </template>
-  <script src="./script.js"></script>
+  <script src="./scripts/script.js"></script>
   </body>
 </html>

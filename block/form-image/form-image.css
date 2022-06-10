@@ -1,4 +1,4 @@
-.pop-up-image__form {
+.form-image {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -7,9 +7,4 @@
   box-sizing: border-box;
 }
 
-@media screen and (max-width: 600px) {
-  .edit-form {
-    max-width: 282px;
-    padding: 25px 22px;
-  }
-}
+
