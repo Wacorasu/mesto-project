@@ -27,7 +27,7 @@ const initialCards = [
 const content= document.querySelector('.main');
 const buttonEdit=content.querySelector('.button-edit');
 const buttonAdd=content.querySelector('.button-add');
-const buttonClose=content.querySelectorAll('.button-exit');
+const buttonsClose=content.querySelectorAll('.button-exit');
 const popupEdit=content.querySelector('#pop-up-edit');
 const popupAdd=content.querySelector('#pop-up-add');
 const popUpImage=content.querySelector('#pop-up-image');
@@ -46,22 +46,24 @@ const popUpImageTitle=content.querySelector('.form-image__title');
 const cardPhoto=templatePhotoCards.querySelector('.photo-card');
 
 
-editTitleName.value='Жак-Ив Кусто';
-editSubTitleName.value='Исследователь океана';
 
 //Изначальное добавление карточек
 initialCards.forEach(function(item){
   addPhotoCard(item.name, item.link);
 });
 
-buttonClose.forEach((button) => {
+buttonsClose.forEach((button) => {
   const popup=button.closest('.pop-up');
   button.addEventListener('click', () => closePopup(popup));
 });
 
-formPopUpEdit.addEventListener('submit', editFormPopup);
-formPopUpAdd.addEventListener('submit', addFormImage);
-buttonEdit.addEventListener('click', () => openPopup(popupEdit));
+formPopUpEdit.addEventListener('submit', editProfile);
+formPopUpAdd.addEventListener('submit', addNewCard);
+buttonEdit.addEventListener('click', () =>{
+  editTitleName.value=titleName.textContent;
+  editSubTitleName.value=subTitleName.textContent;
+  openPopup(popupEdit)
+});
 buttonAdd.addEventListener('click',() => openPopup(popupAdd));
 
 
@@ -75,17 +77,17 @@ function openPopup(popup) {
 
 
 // Функция работы окна просмотра фото
-function openImagePopup(evt) {
+function openImagePopup(name, img) {
   openPopup(popUpImage);
-  popUpImageImage.setAttribute('src', evt.target.src);
-  popUpImageImage.alt=evt.target.alt;
-  popUpImageTitle.textContent=evt.target.alt;
+  popUpImageImage.setAttribute('src', img);
+  popUpImageImage.alt=name;
+  popUpImageTitle.textContent=name;
 }
 
 
 //Функция Удаления карточек
 function deleteCard(evt) {
-   let item = evt.target.parentElement;
+   const item = evt.target.closest('.photo-card');
    item.remove();
 }
 
@@ -95,7 +97,7 @@ function like(evt) {
 }
 
 //Функция работы формы добавления карточек
-function addFormImage(evt) {
+function addNewCard(evt) {
   evt.preventDefault();
   addPhotoCard(nameAdd.value, imageAdd.value);
   evt.target.reset()
@@ -103,7 +105,7 @@ function addFormImage(evt) {
 }
 
 //Функция редактирования профиля
-function editFormPopup(evt) {
+function editProfile(evt) {
   evt.preventDefault();
   titleName.textContent=editTitleName.value;
   subTitleName.textContent=editSubTitleName.value;
@@ -122,7 +124,7 @@ function createCard(name, img) {
   cardItemPhoto.alt=name;
   cardItemButtonLike.addEventListener('click', like);
   cardItemButtonDelete.addEventListener('click', deleteCard);
-  cardItemPhoto.addEventListener('click', openImagePopup);
+  cardItemPhoto.addEventListener('click', () => openImagePopup(name, img));
   return card;
 }
 
