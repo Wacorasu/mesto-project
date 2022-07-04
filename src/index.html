@@ -33,12 +33,14 @@
         <p class="footer__copyright">© 2020 Mesto Russia</p>
       </footer>
       <article class="pop-up" id="pop-up-edit">
-      <div class="edit-form">
+      <div class="edit-form" >
           <h2 class="edit-form__title">Редактировать профиль</h2>
-          <form class="edit-from__input-container" id="edit-form" name="popup-edit">
+          <form class="edit-from__input-container" id="edit-form" name="popup-edit" novalidate>
             <fieldset class="edit-form__edit-container">
-                <input class="edit-form__edit" id=edit-name type="text" placeholder="Введите имя" required name="edit-title" value="">
-                <input class="edit-form__edit" id=edit-subname type="text" placeholder="Введите род деятельности" required name="edit-subtitle" value="">
+                <input class="edit-form__edit" id="edit-name" type="text" minlength="2" maxlength="20"  placeholder="Введите имя" required name="edit-title" value="" required>
+                <span class="form-input-error" id="edit-name-error"></span>
+                <input class="edit-form__edit" id="edit-subname" type="text"  minlength="2" maxlength="200" placeholder="Введите род деятельности" required name="edit-subtitle" value="" required>
+                <span class="form-input-error" id="edit-subname-error"></span>
             </fieldset>
             <button class="button-save" type="submit">Сохранить</button>
           </form>
@@ -50,8 +52,10 @@
             <h2 class="edit-form__title">Новое место</h2>
             <form class="edit-from__input-container" id="add-form" name="popup-add">
               <fieldset class="edit-form__edit-container">
-                  <input class="edit-form__edit edit-form__edit_popup-add" id="add-name" type="text" placeholder="Название" required name="add-name" value="">
-                  <input class="edit-form__edit edit-form__edit_popup-add" id="add-image" type="text" placeholder="Ссылка на картинку" required name="add-image" value="">
+                  <input class="edit-form__edit edit-form__edit_popup-add" id="add-name" type="text" minlength="2" maxlength="30" placeholder="Название" required name="add-name" value="">
+                  <span class="form-input-error" id="add-name-error"></span>
+                  <input class="edit-form__edit edit-form__edit_popup-add" id="add-image" type="url" placeholder="Ссылка на картинку" required name="add-image" value="">
+                  <span class="form-input-error" id="add-image-error"></span>
               </fieldset>
               <button class="button-save" type="submit">Создать</button>
             </form>

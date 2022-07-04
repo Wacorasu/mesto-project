@@ -1,6 +1,7 @@
 import {addNewCard, addPhotoCard} from './card.js'
 import {closePopup, openPopup} from './utils.js';
 import {editProfile} from './modal.js';
+import {enableValidation} from './validate.js';
 export {popupEdit, popupAdd, editTitleName, editSubTitleName, titleName, subTitleName};
 
 const initialCards = [
@@ -41,7 +42,8 @@ const editTitleName=popupEdit.querySelector('#edit-name');
 const editSubTitleName=popupEdit.querySelector('#edit-subname');
 const titleName=content.querySelector('.profile__title-name');
 const subTitleName=content.querySelector('.profile__subtitle-description');
-
+editTitleName.value=titleName.textContent;
+editSubTitleName.value=subTitleName.textContent;
 
 //Изначальное добавление карточек
 initialCards.forEach(function(item){
@@ -63,5 +65,10 @@ buttonEdit.addEventListener('click', () =>{
 buttonAdd.addEventListener('click',() => openPopup(popupAdd));
 
 
-
-
+enableValidation({
+  formSelector: '.edit-from__input-container',
+  inputSelector: '.edit-form__edit',
+  buttonSelector: '.button-save',
+  editFormErrorClass: 'edit-form__edit_error',
+  inactiveButtonClass: 'button-save_inactive'
+});

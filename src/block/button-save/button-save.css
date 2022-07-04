@@ -9,13 +9,14 @@
   min-width: 358px;
   min-height: 50px;
   background-color: #000;
+  border: none;
   border-radius: 2px;
   opacity: 1;
   transition: opasity .4s ease-in-out;
   border: none;
 }
 
-.button-save:hover {
+.button-save:not(.button-save_inactive):hover {
   opacity: 0.8;
 }
 
