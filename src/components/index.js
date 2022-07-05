@@ -2,32 +2,40 @@ import {addNewCard, addPhotoCard} from './card.js'
 import {closePopup, openPopup} from './utils.js';
 import {editProfile} from './modal.js';
 import {enableValidation} from './validate.js';
+import '../pages/index.css';
 export {popupEdit, popupAdd, editTitleName, editSubTitleName, titleName, subTitleName};
+
+const californiaImage = new URL('../images/card-california.jpg', import.meta.url);
+const fanlandImage = new URL('../images/card-finland.jpg', import.meta.url);
+const italiImage = new URL('../images/card-italia-marche.jpg', import.meta.url);
+const kareliaImage = new URL('../images/card-kizhi.jpg', import.meta.url);
+const switzerlandImage = new URL('../images/card-schweiz.jpg', import.meta.url);
+const japanImage = new URL('../images/card_okinawa.jpg', import.meta.url);
 
 const initialCards = [
   {
     name: 'Калифорния',
-    link: './images/card-california.jpg'
+    link: californiaImage
   },
   {
     name: 'Финляндия',
-    link: './images/card-finland.jpg'
+    link: fanlandImage
   },
   {
     name: 'Марке Италия',
-    link: './images/card-italia-marche.jpg'
+    link: italiImage
   },
   {
     name: 'Кижи Карелия',
-    link: './images/card-kizhi.jpg'
+    link: kareliaImage
   },
   {
     name: 'Швейцария',
-    link: './images/card-schweiz.jpg'
+    link: switzerlandImage
   },
   {
     name: 'Окинава Япония',
-    link: './images/card_okinawa.jpg'
+    link: japanImage
   }
   ];
 const content= document.querySelector('.main');
