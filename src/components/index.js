@@ -33,7 +33,7 @@ const initialCards = [
 const content= document.querySelector('.main');
 const buttonEdit=content.querySelector('.button-edit');
 const buttonAdd=content.querySelector('.button-add');
-const buttonsClose=content.querySelectorAll('.button-exit');
+const buttonsClose=content.querySelectorAll('.button-exit, .pop-up');
 const popupEdit=content.querySelector('#pop-up-edit');
 const popupAdd=content.querySelector('#pop-up-add');
 const formPopUpEdit=popupEdit.querySelector('#edit-form');
@@ -42,6 +42,7 @@ const editTitleName=popupEdit.querySelector('#edit-name');
 const editSubTitleName=popupEdit.querySelector('#edit-subname');
 const titleName=content.querySelector('.profile__title-name');
 const subTitleName=content.querySelector('.profile__subtitle-description');
+
 editTitleName.value=titleName.textContent;
 editSubTitleName.value=subTitleName.textContent;
 
@@ -50,10 +51,15 @@ initialCards.forEach(function(item){
   addPhotoCard(item.name, item.link);
 });
 
-buttonsClose.forEach((button) => {
+
+buttonsClose.forEach(button => {
   const popup=button.closest('.pop-up');
-  button.addEventListener('click', () => closePopup(popup));
+  button.addEventListener('click', (evt) => {
+    if (evt.target===evt.currentTarget){
+    closePopup(popup);
+    }});
 });
+
 
 formPopUpEdit.addEventListener('submit', editProfile);
 formPopUpAdd.addEventListener('submit', addNewCard);
