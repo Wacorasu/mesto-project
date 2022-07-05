@@ -1,9 +1,7 @@
-import {addNewCard, addPhotoCard} from './card.js'
-import {closePopup, openPopup} from './utils.js';
-import {editProfile} from './modal.js';
-import {enableValidation} from './validate.js';
+import {createCard} from './card.js'
+import {closePopup, openPopup, closeWithOverlay} from './modal.js';
+import {enableValidation, disabledButton} from './validate.js';
 import '../pages/index.css';
-export {popupEdit, popupAdd, editTitleName, editSubTitleName, titleName, subTitleName};
 
 const californiaImage = new URL('../images/card-california.jpg', import.meta.url);
 const fanlandImage = new URL('../images/card-finland.jpg', import.meta.url);
@@ -42,6 +40,7 @@ const content= document.querySelector('.main');
 const buttonEdit=content.querySelector('.button-edit');
 const buttonAdd=content.querySelector('.button-add');
 const buttonsClose=content.querySelectorAll('.button-exit, .pop-up');
+const photoPanel = content.querySelector(".photo-panel");
 const popupEdit=content.querySelector('#pop-up-edit');
 const popupAdd=content.querySelector('#pop-up-add');
 const formPopUpEdit=popupEdit.querySelector('#edit-form');
@@ -50,6 +49,9 @@ const editTitleName=popupEdit.querySelector('#edit-name');
 const editSubTitleName=popupEdit.querySelector('#edit-subname');
 const titleName=content.querySelector('.profile__title-name');
 const subTitleName=content.querySelector('.profile__subtitle-description');
+const nameAdd=content.querySelector('#add-name');
+const imageAdd=content.querySelector('#add-image');
+
 
 editTitleName.value=titleName.textContent;
 editSubTitleName.value=subTitleName.textContent;
@@ -62,10 +64,7 @@ initialCards.forEach(function(item){
 
 buttonsClose.forEach(button => {
   const popup=button.closest('.pop-up');
-  button.addEventListener('click', (evt) => {
-    if (evt.target===evt.currentTarget){
-    closePopup(popup);
-    }});
+  button.addEventListener('click', closeWithOverlay);
 });
 
 
@@ -78,6 +77,28 @@ buttonEdit.addEventListener('click', () =>{
 });
 buttonAdd.addEventListener('click',() => openPopup(popupAdd));
 
+//Функция работы формы добавления карточек
+function addNewCard(evt) {
+  evt.preventDefault();
+  addPhotoCard(nameAdd.value, imageAdd.value);
+  disabledButton(evt.target.buttonAdd, 'button-save_inactive');
+  evt.target.reset();
+  closePopup(popupAdd);
+}
+
+//Функция добавление самих карточек
+function addPhotoCard(name, img) {
+  const photoCard = createCard(name, img);
+  photoPanel.prepend(photoCard);
+}
+
+//Функция редактирования профиля
+function editProfile(evt) {
+  evt.preventDefault();
+  titleName.textContent=editTitleName.value;
+  subTitleName.textContent=editSubTitleName.value;
+  closePopup(popupEdit);
+}
 
 enableValidation({
   formSelector: '.edit-from__input-container',

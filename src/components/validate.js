@@ -1,4 +1,4 @@
-export {enableValidation};
+export {enableValidation, disabledButton};
 
 function isValid(form, element, nameClass){
   if(!element.validity.valid){
@@ -59,3 +59,8 @@ function enableValidation(parametrs){
   const classButtonInactive=parametrs.inactiveButtonClass;
   setEventListener(classForm, classInput, classButton, classEditFormError, classButtonInactive);
 };
+
+function disabledButton(buttonElement, classButtonInactive) {
+  buttonElement.classList.add(classButtonInactive);
+  buttonElement.setAttribute("disabled", "disabled");
+}

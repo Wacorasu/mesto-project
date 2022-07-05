@@ -1,16 +1,14 @@
-export {addNewCard, addPhotoCard};
-import {closePopup, openPopup} from './utils.js';
-import {popupAdd} from './index.js'
+export {createCard};
+import {openPopup} from './modal.js';
+
+
 
 const content=document.querySelector('.main');
-const photoPanel = content.querySelector(".photo-panel");
 const templatePhotoCards=content.querySelector('.template-photo-card').content;
 const cardPhoto=templatePhotoCards.querySelector('.photo-card');
 const popUpImageImage=content.querySelector('.form-image__image');
 const popUpImageTitle=content.querySelector('.form-image__title');
 const popUpImage=content.querySelector('#pop-up-image');
-const nameAdd=content.querySelector('#add-name');
-const imageAdd=content.querySelector('#add-image');
 
 //Функция Удаления карточек
 function deleteCard(evt) {
@@ -23,13 +21,6 @@ function like(evt) {
   evt.target.classList.toggle("button-like_active");
 }
 
-//Функция работы формы добавления карточек
-function addNewCard(evt) {
-  evt.preventDefault();
-  addPhotoCard(nameAdd.value, imageAdd.value);
-  evt.target.reset();
-  closePopup(popupAdd);
-}
 
 //Функция создания карточек
 function createCard(name, img) {
@@ -47,15 +38,11 @@ function createCard(name, img) {
   return card;
 }
 
-//Функция добавление самих карточек
-function addPhotoCard(name, img) {
-  const photoCard = createCard(name, img);
-  photoPanel.prepend(photoCard);
-}
 
 function openImagePopup(name, img) {
-  openPopup(popUpImage);
   popUpImageImage.setAttribute('src', img);
   popUpImageImage.alt=name;
   popUpImageTitle.textContent=name;
+  popUpImage.classList.add("pop-up__opened-image");
+  openPopup(popUpImage);
 }
