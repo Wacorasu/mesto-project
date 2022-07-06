@@ -43,6 +43,5 @@ function openImagePopup(name, img) {
   popUpImageImage.setAttribute('src', img);
   popUpImageImage.alt=name;
   popUpImageTitle.textContent=name;
-  popUpImage.classList.add("pop-up__opened-image");
   openPopup(popUpImage);
 }
