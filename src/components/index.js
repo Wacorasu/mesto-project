@@ -4,7 +4,7 @@ import {closePopup, openPopup, closeWithOverlay} from './modal.js';
 import {enableValidation, toggleButtonState} from './validate.js';
 export {profileID, massiveCards, enableRenderLoadin, disableRenderLoadin};
 
-/* import '../pages/index.css'; */
+import '../pages/index.css';
 
 
 const content= document.querySelector('.main');
