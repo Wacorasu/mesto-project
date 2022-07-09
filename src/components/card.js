@@ -1,7 +1,7 @@
 export {createCard};
 import {closePopup, openPopup} from './modal.js';
 import {setLikeCard, deleteLikeCard, deleteServerCard} from './api.js';
-import {profileID, massiveCards, enableRenderLoadin, disableRenderLoadin} from './index.js';
+import {profileID, massiveCards, enableRenderLoadin, disableRenderLoadin, checkResponse} from './index.js';
 
 
 
@@ -20,13 +20,7 @@ buttonDelete.addEventListener('click',  deleteCard);
 function like(evt, cardLikeCount) {
   if (evt.target.classList.contains("button-like_active")){
     deleteLikeCard(evt.target.closest('.photo-card').id)
-    .then(res=>{
-      if (res.ok){
-        return res.json();
-      } else {
-        return Promise.reject(res.status);
-      }
-    })
+    .then(checkResponse)
     .then(res=>{
       cardLikeCount.textContent=res.likes.length;
       evt.target.classList.remove('button-like_active');
@@ -34,13 +28,7 @@ function like(evt, cardLikeCount) {
     .catch(err=> console.log(err));
   }else{
     setLikeCard(evt.target.closest('.photo-card').id)
-    .then(res=>{
-      if (res.ok){
-        return res.json();
-      } else {
-        return Promise.reject(res.status);
-      }
-    })
+    .then(checkResponse)
     .then(res=>{
       cardLikeCount.textContent=res.likes.length;
       evt.target.classList.add('button-like_active');
@@ -93,21 +81,15 @@ function openPopupDelete(id) {
 function deleteCard(evt) {
   enableRenderLoadin(buttonDelete);
   deleteServerCard(evt.target.name)
-  .then(res=>{
-    if (res.ok){
-      return res.json();
-    } else {
-      return Promise.reject(res.status);
-    }
-  })
-  .then(res=>{
+  .then(checkResponse)
+  .then(()=>{
     const item=document.getElementById(`${evt.target.name}`);
     item.remove();
     evt.target.name='';
+    closePopup(popupDelete);
   })
   .catch(err=> console.log(err))
   .finally(()=>{
     disableRenderLoadin(buttonDelete);
-    closePopup(popupDelete);
   });
 }

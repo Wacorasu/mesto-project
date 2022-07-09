@@ -1,8 +1,8 @@
 import {getDataProfile, setDataProfile, setAvatarProfile, getDataCard, putNewCard} from './api.js';
 import {createCard} from './card.js'
-import {closePopup, openPopup, closeWithOverlay} from './modal.js';
+import {closePopup, openPopup} from './modal.js';
 import {enableValidation, toggleButtonState} from './validate.js';
-export {profileID, massiveCards, enableRenderLoadin, disableRenderLoadin};
+export {profileID, massiveCards, enableRenderLoadin, disableRenderLoadin, checkResponse};
 
 import '../pages/index.css';
 
@@ -10,7 +10,7 @@ import '../pages/index.css';
 const content= document.querySelector('.main');
 const buttonEdit=content.querySelector('.button-edit');
 const buttonAddCard=content.querySelector('#buttonAddCard');
-const buttonsClose=content.querySelectorAll('.button-exit, .pop-up');
+const buttonsClose=content.querySelectorAll('.pop-up');
 const buttonsEditAvatar=content.querySelector('.profile__avatar-edit');
 const photoPanel = content.querySelector(".photo-panel");
 const popupEdit=content.querySelector('#pop-up-edit');
@@ -30,58 +30,50 @@ const porfileAvatar=content.querySelector('.profile__avatar');
 const massiveCards=[];
 let profileID='';
 
-//Загрузка данных профиля
-
-getDataProfile()
-.then(res=>{
-  if (res.ok){
-    return res.json();
-  } else {
-    return Promise.reject(res.status);
-  }
-})
-.then(res=>{
-  setProfileData(res.name, res.about);
-  setProfileAvatar(res.avatar);
-  profileID=res._id;
-})
-.catch(err=> console.log(err));
-
-
-//Загрузка карточек пользователей
-getDataCard()
-.then(res=>{
-  if (res.ok){
-    return res.json();
-  } else {
-    return Promise.reject(res.status);
-  }
-})
-.then(res=>{
-  res.forEach(function(item){
-    massiveCards.push(item);
-    addPhotoCardApend(item.name, item.link, item.likes, item._id, true);
-  });
-})
-.catch(err=> console.log(err));
 
 function setProfileData(title, subtitle) {
   titleName.textContent=title;
   subTitleName.textContent=subtitle;
 }
 
-
+//Загрузка данных профиля
 function setProfileAvatar(img) {
   porfileAvatar.setAttribute('src', img);
 };
+Promise.all([getDataProfile(), getDataCard()])
+.then(([userData, cards]) =>{
+  if (userData.ok && cards.ok){
+    return Promise.all([userData.json(), cards.json()]);
+  } else {
+    return Promise.reject([userData.status, cards.status]);
+  }
+})
+.then((res) => {
+  setProfileData(res[0].name, res[0].about);
+  setProfileAvatar(res[0].avatar);
+  profileID=res[0]._id;
+  res[1].forEach(function(item){
+    massiveCards.push(item);
+    addPhotoCardApend(item.name, item.link, item.likes, item._id, true);
+  });
+})
+.catch(err => console.log(err));
 
+
+
+//Добавление слушателей на закртыие попапов
+buttonsClose.forEach((popup) => {
+  popup.addEventListener('mousedown', (evt) => {
+      if (evt.target.classList.contains('pop-up_opened')) {
+          closePopup(popup)
+      }
+      if (evt.target.classList.contains('button-exit')) {
+        closePopup(popup)
+      }
+  })
+})
 
 //Добавление слушателей
-buttonsClose.forEach(button => {
-  button.addEventListener('click', closeWithOverlay);
-});
-
-
 formPopUpEdit.addEventListener('submit', editProfile);
 formPopUpAdd.addEventListener('submit', addNewCard);
 buttonsEditAvatar.addEventListener('click', () => {
@@ -89,7 +81,6 @@ buttonsEditAvatar.addEventListener('click', () => {
   openPopup(popupAvatar);
 });
 formPopUpAvatar.addEventListener('submit', addAvatar);
-
 
 
 buttonEdit.addEventListener('click', () =>{
@@ -108,21 +99,15 @@ function addAvatar(evt) {
   evt.preventDefault();
   enableRenderLoadin(formPopUpAvatar.buttonAddAvatar);
   setAvatarProfile(avatarAdd.value)
+  .then(checkResponse)
   .then(res=>{
-    if (res.ok){
-      return res.json();
-    } else {
-      return Promise.reject(res.status);
-    }
-  })
-  .then(res=>{
-  setProfileAvatar(res.avatar);
+    setProfileAvatar(res.avatar);
+    closePopup(popupAvatar);
+    evt.target.reset();
   })
   .catch(err=> console.log(err))
   .finally(()=>{
     disableRenderLoadin(formPopUpAvatar.buttonAddAvatar);
-    evt.target.reset();
-    closePopup(popupAvatar);
   });
 };
 
@@ -135,27 +120,31 @@ function disableRenderLoadin(buttonElement){
   buttonElement.textContent=buttonElement.textContent.slice(0,-3);
 }
 
-//Функция работы формы добавления карточек
-function addNewCard(evt) {
-  evt.preventDefault();
-  enableRenderLoadin(formPopUpAdd.buttonAddCard);
-  putNewCard(nameAdd.value, imageAdd.value)
-  .then(res=>{
+//обработчик запроса
+function checkResponse(res){
+  console.log(res);
     if (res.ok){
       return res.json();
     } else {
       return Promise.reject(res.status);
     }
-  })
+};
+
+//Функция работы формы добавления карточек
+function addNewCard(evt) {
+  evt.preventDefault();
+  enableRenderLoadin(formPopUpAdd.buttonAddCard);
+  putNewCard(nameAdd.value, imageAdd.value)
+  .then(checkResponse)
   .then(res=>{
     massiveCards.push(res);
     addPhotoCardPrepand(res.name, res.link, res.likes, res._id, false);
+    closePopup(popupAdd);
+    evt.target.reset();
   })
   .catch(err=> console.log(err))
   .finally(()=>{
-    disableRenderLoadin(formPopUpAdd.buttonAddCard)
-    evt.target.reset();
-    closePopup(popupAdd);
+    disableRenderLoadin(formPopUpAdd.buttonAddCard);
   });
 };
 
@@ -175,20 +164,14 @@ function editProfile(evt) {
   evt.preventDefault();
   enableRenderLoadin(formPopUpEdit.buttonEdit)
   setDataProfile(editTitleName.value, editSubTitleName.value)
+  .then(checkResponse)
   .then(res=>{
-    if (res.ok){
-      return res.json();
-    } else {
-      return Promise.reject(res.status);
-    }
-  })
-  .then(res=>{
-  setProfileData(res.name, res.about);
+    setProfileData(res.name, res.about);
+    closePopup(popupEdit);
   })
   .catch(err=> console.log(err))
   .finally(()=>{
     disableRenderLoadin(formPopUpEdit.buttonEdit)
-    closePopup(popupEdit);
   })
 
 }

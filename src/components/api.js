@@ -1,28 +1,33 @@
 export {getDataProfile, setDataProfile, setAvatarProfile, getDataCard, setLikeCard, deleteLikeCard, putNewCard, deleteServerCard};
 
+const config = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/plus-cohort-13',
+  headers: {
+    authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce',
+    'Content-Type': 'application/json'
+  }
+};
+
 const getDataProfile = () => {
-  return fetch ('https://mesto.nomoreparties.co/v1/plus-cohort-13/users/me', {
+  return fetch (`${config.baseUrl}/users/me`, {
     headers: {
-      authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce'
+      authorization: config.headers.authorization
     }
   });
-}
+};
 
 const getDataCard = () => {
-  return fetch ('https://mesto.nomoreparties.co/v1/plus-cohort-13/cards', {
+  return fetch (`${config.baseUrl}/cards`, {
     headers: {
-      authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce'
+      authorization: config.headers.authorization
     }
   });
-}
+};
 
 const setDataProfile =(titleName, subTitleName) => {
- return fetch('https://mesto.nomoreparties.co/v1/plus-cohort-13/users/me', {
+ return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
-    headers: {
-      authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce',
-      'Content-Type': 'application/json'
-    },
+    headers: config.headers,
     body: JSON.stringify({
       name: titleName,
       about: subTitleName
@@ -31,41 +36,35 @@ const setDataProfile =(titleName, subTitleName) => {
 };
 
 const setAvatarProfile = img => {
-  return fetch('https://mesto.nomoreparties.co/v1/plus-cohort-13/users/me/avatar', {
+  return fetch(`${config.baseUrl}/users/me/avatar`, {
      method: 'PATCH',
-     headers: {
-       authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce',
-       'Content-Type': 'application/json'
-     },
+     headers: config.headers,
      body: JSON.stringify({avatar: img})
    });
  };
 
  const setLikeCard = CardId => {
-  return fetch(`https://mesto.nomoreparties.co/v1/plus-cohort-13/cards/likes/${CardId}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${CardId}`, {
      method: 'PUT',
      headers: {
-       authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce',
+       authorization: config.headers.authorization,
      }
    });
  };
 
  const deleteLikeCard = CardId => {
-  return fetch(`https://mesto.nomoreparties.co/v1/plus-cohort-13/cards/likes/${CardId}`, {
+  return fetch(`${config.baseUrl}/cards/likes/${CardId}`, {
      method: 'DELETE',
      headers: {
-       authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce',
+       authorization: config.headers.authorization,
      }
    });
  };
 
  const putNewCard =(name, url) => {
-  return fetch('https://nomoreparties.co/v1/plus-cohort-13/cards', {
+  return fetch(`${config.baseUrl}/cards`, {
      method: 'POST',
-     headers: {
-      authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce',
-      'Content-Type': 'application/json'
-     },
+     headers: config.headers,
      body: JSON.stringify({
       name: name,
       link: url
@@ -74,10 +73,10 @@ const setAvatarProfile = img => {
  };
 
  const deleteServerCard = CardId => {
-  return fetch(`https://mesto.nomoreparties.co/v1/plus-cohort-13/cards/${CardId}`, {
+  return fetch(`${config.baseUrl}/cards/${CardId}`, {
      method: 'DELETE',
      headers: {
-       authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce',
+       authorization: config.headers.authorization,
      }
    });
  };

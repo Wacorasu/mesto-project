@@ -1,4 +1,4 @@
-export { closePopup, openPopup, closeWithOverlay };
+export { closePopup, openPopup};
 
 function closePopup(popup) {
   popup.classList.remove("pop-up_opened");
@@ -16,13 +16,6 @@ function closeWithEsc(evt){
     closePopup(popup);
   }
 };
-
-function closeWithOverlay(evt){
-  if (evt.target===evt.currentTarget){
-    const popup=document.querySelector('.pop-up_opened')
-    closePopup(popup);
-  };
-}
 
 
 
