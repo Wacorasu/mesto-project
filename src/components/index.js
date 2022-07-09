@@ -122,7 +122,6 @@ function disableRenderLoadin(buttonElement){
 
 //обработчик запроса
 function checkResponse(res){
-  console.log(res);
     if (res.ok){
       return res.json();
     } else {
