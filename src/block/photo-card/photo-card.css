@@ -1,8 +1,0 @@
-.photo-card {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border-radius: 10px;
-  position: relative;
-}
