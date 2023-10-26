@@ -1,14 +1,15 @@
 export {getDataProfile, setDataProfile, setAvatarProfile, getDataCard, setLikeCard, deleteLikeCard, putNewCard, deleteServerCard};
 
 const config = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/plus-cohort-13',
+  baseUrl: process.env.BASE_URL,
   headers: {
-    authorization: '529f3fca-6bdc-4e81-9927-7f5521acabce',
+    authorization: process.env.AUTHORIZATION_KEY,
     'Content-Type': 'application/json'
   }
 };
 
 const getDataProfile = () => {
+  console.log(process.env)
   return fetch (`${config.baseUrl}/users/me`, {
     headers: {
       authorization: config.headers.authorization
