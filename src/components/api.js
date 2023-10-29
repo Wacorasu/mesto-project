@@ -9,7 +9,6 @@ const config = {
 };
 
 const getDataProfile = () => {
-  console.log(process.env)
   return fetch (`${config.baseUrl}/users/me`, {
     headers: {
       authorization: config.headers.authorization
